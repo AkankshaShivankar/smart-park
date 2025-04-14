@@ -1,0 +1,39 @@
+<!-- filename: slot.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Parking Slot Info</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; text-align: center; }
+    #map { width: 100%; max-width: 400px; height: 250px; margin: 20px auto; }
+  </style>
+</head>
+<body>
+  <h2>🎉 Your Parking Slot</h2>
+  <p id="slot"></p>
+  <p id="direction"></p>
+  <p id="distance"></p>
+  <div id="map"></div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const sid = urlParams.get('sid') || 'A1';
+
+    // Simulated database (could be replaced with Firebase or Google Sheets)
+    const slots = {
+      A1: { direction: "Right → Aisle 1 → Slot 1", distance: "30 meters" },
+      A2: { direction: "Left → Aisle 2 → Slot 2", distance: "45 meters" },
+      B1: { direction: "Straight → Aisle 3 → Slot 1", distance: "60 meters" }
+    };
+
+    const slotInfo = slots[sid] || { direction: "Not Found", distance: "-" };
+
+    document.getElementById("slot").textContent = `🅿️ Slot: ${sid}`;
+    document.getElementById("direction").textContent = `➡️ Direction: ${slotInfo.direction}`;
+    document.getElementById("distance").textContent = `📏 Distance: ${slotInfo.distance}`;
+
+    // Placeholder map image
+    document.getElementById("map").innerHTML = `<img src="https://via.placeholder.com/400x250?text=Map+to+${sid}" alt="Map to ${sid}">`;
+  </script>
+</body>
+</html>
